@@ -19,6 +19,7 @@ export class ListTodosComponent implements OnInit {
 
   todos:Todo[];
   message:string;
+  username:string;
 //   listTodos = [
 //   new Todo(1,'Learn to dance', false, new Date()),
 //   new Todo( 2,'Learn to Write', false , new Date()),
@@ -30,23 +31,25 @@ export class ListTodosComponent implements OnInit {
               private router:Router) { }
 
   ngOnInit() {
+    this.username = sessionStorage.getItem('authenticatedUser');
     this.getAllTodos();
   }
 
   getAllTodos(){
-    this.todosService.getAllTodos('nayazjh').subscribe(
+    this.todosService.getAllTodos(this.username).subscribe(
       response => {
         this.todos = response;
       }
     )
   }
+
   deleteTodo(id){
-    this.todosService.deleteTodo('nayazjh',id).subscribe(
+    this.todosService.deleteTodo(this.username,id).subscribe(
       response => {
         this.message = `Delete of Todo ${id} Successfull!`; 
+        this.getAllTodos();
       }
     )
-    this.getAllTodos();
   }
 
   updateTodo(id){

@@ -8,7 +8,7 @@ export class HardcodedauthenticationserviceService {
   constructor() { }
 
   authenticate(username, password){
-    if(username === "nayazjh" && password === "abc"){
+    if(username === "nayazjh" && password === "born2win"){
       sessionStorage.setItem('authenticatedUser', username);
       return true;
   } else {
